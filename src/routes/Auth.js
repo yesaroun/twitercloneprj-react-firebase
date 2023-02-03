@@ -1,21 +1,25 @@
 import React, {useState} from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 const Auth = () => {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [newAccount, setNewAccount] = useState(true);
 
   const onEmailChange = (event) => {
-    const {value} = event.target
-    setEmail(value)
+    const {value} = event.target;
+    setEmail(value);
   }
   const onPasswordChange = (event) => {
-    const {value} = event.target
-    setPassword(value)
+    console.log(event);
+    const {value} = event.target;
+    setPassword(value);
     // value는 입력된 값 자체를 말한다.
   }
 
-  const onSubmit = (event) => {
+  const toggleAccount = () => setNewAccount((prev) => !prev);
+
+  const onSubmit = async (event) => {
     event.preventDefault();     // submit 버튼 클릭 시 새로고침 방지
     console.log(event.target.value);
     // 여기서 firebase로 정보를 보내야 한다.
@@ -23,9 +27,13 @@ const Auth = () => {
 
     const auth = getAuth();
     // auth 불러와서 사용한다.
+    let data;
+    if (newAccount) {
+      data = await createUserWithEmailAndPassword(auth, email, password);
+    } else {
+      data = await signInWithEmailAndPassword(auth, email, password);
+    }
 
-    const data = createUserWithEmailAndPassword(auth, email, password);
-    console.log(data);
   }
 
   return (
@@ -40,7 +48,11 @@ const Auth = () => {
         onChange={onPasswordChange}
         required
       />
-      <input type="submit" value="sign in"/>
+      <input type="submit" value={newAccount ? "Create Account": "Sign in"}/>
+
+      <span onClick={toggleAccount}>
+        {newAccount ? "Sign In" : "Create Account"}
+      </span>
     </form>
   )
 }
