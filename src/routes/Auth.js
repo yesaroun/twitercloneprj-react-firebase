@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -28,32 +28,57 @@ const Auth = () => {
     const auth = getAuth();
     // auth 불러와서 사용한다.
     let data;
+
     if (newAccount) {
       data = await createUserWithEmailAndPassword(auth, email, password);
     } else {
-      data = await signInWithEmailAndPassword(auth, email, password);
+      data = await signInWithEmailAndPassword(auth, email, password)
     }
+  }
 
+  const onSocialClick = async (event) => {
+    console.log(event);
+
+    const {name} = event.target
+    console.log(name)
+
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+    const data = await signInWithPopup(auth, provider);
+    console.log(data)
+
+    //signInWithPopup(auth, provider)
+
+    if (name === "google") {
+      const provider = new GoogleAuthProvider();
+    }
   }
 
   return (
-    <form onSubmit={onSubmit}>
-      <input type="email" name="email" placeholder="input email"
-        value={email}
-        onChange={onEmailChange}
-        required
-      />
-      <input type="password" name="password" placeholder="input password"
-        value={password}
-        onChange={onPasswordChange}
-        required
-      />
-      <input type="submit" value={newAccount ? "Create Account": "Sign in"}/>
+    <div>
+      <form onSubmit={onSubmit}>
+        <input type="email" name="email" placeholder="input email"
+          value={email}
+          onChange={onEmailChange}
+          required
+        />
+        <input type="password" name="password" placeholder="input password"
+          value={password}
+          onChange={onPasswordChange}
+          required
+        />
+        <input type="submit" value={newAccount ? "Create Account": "Sign in"}/>
 
-      <span onClick={toggleAccount}>
-        {newAccount ? "Sign In" : "Create Account"}
-      </span>
-    </form>
+        <span onClick={toggleAccount}>
+          {newAccount ? "Sign In" : "Create Account"}
+        </span>
+      </form>
+
+      <button onClick={onSocialClick} name="google">Google Login</button>
+      <button onClick={onSocialClick} name="github">GitHub Login</button>
+      <button onClick={onSocialClick} name="facebook">Facebook Login</button>
+
+    </div>
   )
 }
 
