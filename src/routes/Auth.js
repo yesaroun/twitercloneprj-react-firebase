@@ -31,14 +31,14 @@ const Auth = () => {
   return (
     <form onSubmit={onSubmit}>
       <input type="email" name="email" placeholder="input email"
-       value={email}
-       onChange={onEmailChange}
-       required
+        value={email}
+        onChange={onEmailChange}
+        required
       />
       <input type="password" name="password" placeholder="input password"
-             value={password}
-             onChange={onPasswordChange}
-             required
+        value={password}
+        onChange={onPasswordChange}
+        required
       />
       <input type="submit" value="sign in"/>
     </form>
