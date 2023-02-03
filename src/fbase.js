@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 // 위 코드는 공식문서에 있다.
 
-// 코드 그대fh 가져오면 된다. 홈페이지
+// 코드 그대로 가져오면 된다. 홈페이지
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
