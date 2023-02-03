@@ -4,8 +4,7 @@ import Home from "../routes/Home"
 import Auth from "../routes/Auth"
 import Profile from "../routes/Profile";
 
-const AppRouter = () => {
-
+const AppRouter = ({isLoggedIn, userObj}) => {
     return (
         <Router>
             <Routes>
