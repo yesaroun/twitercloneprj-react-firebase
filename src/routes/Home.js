@@ -37,10 +37,15 @@ const Home = ({userObj}) => {   // userObj를 가져온다 왜냐하면 글을 �
   };
 
 
-  // db로 부터 데이터 불러오기
+  // db로 부터 데이터 불러오기(읽어오기)
   useEffect(() => {
+    // 실행하면 useEffect가 실행된다.
+    console.log("useEffect 실행");
+    // 값이 두번 출력되는 이유는 index.js에서 React.StrictMode여서 일부러 2번식 데이터를 보낸다. 개발 모드임 /
     const q = query(
+      // query 문 부분?
       collection(dbFirestore, "tweets"),
+      // 아래는 정렬 부분 처리 코드
       orderBy("createAt", "desc")
     );
 
@@ -74,12 +79,13 @@ const Home = ({userObj}) => {   // userObj를 가져온다 왜냐하면 글을 �
         {/*글을 쓰면 제출을 해야해서 submit 그리고 onSubmit 속성과 메서드를 주면 위에 onSubmit 메서드 작동한다*/}
       </form>
       <div>
-        {tweets.map((tweet) => (
+        {tweets.map((tweet) => (    // 안에 있는 값을 하나씩 불러온다.
           <div key={tweet.id}>
             <Tweet
               key={tweet.id}
               nweetObj={tweet}
               isOwner={tweet.createdId === userObj.uid}
+              // 글을 쓸때 작성자 구분하기!  ㄴ
             />
           </div>
         ))}

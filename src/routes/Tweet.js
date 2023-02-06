@@ -35,6 +35,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
   };
   
   const toggleEditing = () => setEditing((prev) => !prev);
+  // 토글 기능은 암기하기
 
   const onChange = (event) => {
     const {
@@ -45,7 +46,9 @@ const Nweet = ({ nweetObj, isOwner }) => {
   return (
     <div>
       {editing ? (
+
         <>
+          {/*수정할 데이터가 필요하다*/}
           <form onSubmit={onSubmit}>
             <input
               type="text"
