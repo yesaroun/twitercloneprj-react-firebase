@@ -18,6 +18,7 @@ const firebaseConfig = {
   messagingSenderId: "521008383225",
   appId: "1:521008383225:web:f98f778da31c5bcae54e28"
 };
+// 여기 다시 세팅하기 .env 참고해서!
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
