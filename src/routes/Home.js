@@ -18,8 +18,10 @@ const Home = ({userObj}) => {   // userObj를 가져온다 왜냐하면 글을 �
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    // 이 코드는 새로고침을 방지하기 위해서,
 
     // db에 데이터 추가
+    // 공식 문서에서 옮겨 왔고, 참고하기
     await addDoc(collection(dbFirestore, "tweets"), {
       text: tweet,
       createAt: Date.now(),
@@ -31,6 +33,7 @@ const Home = ({userObj}) => {   // userObj를 가져온다 왜냐하면 글을 �
   const onChange = (event) => {
     const {value} = event.target;
     setTweet(value);
+    // 입력한 값을 value로 받아올 수 있고 이걸해야 서버에 데이터를 보낼 수 있다.
   };
 
 
@@ -59,14 +62,16 @@ const Home = ({userObj}) => {   // userObj를 가져온다 왜냐하면 글을 �
 
   return (
     <div>
+      {/*글을 작성하는 코드*/}
       <form onSubmit={onSubmit}>
         <input
-          value={tweet}
+          value={tweet}   // 여기서 어떤 값을 입력하느지는 알 수가 없다. 그래서 input을 쓰면 onchange함수를 반드시 쓴다 그리고 value로 받아온다.
           onChange={onChange}
           type="text"
           placeholder="당신의 마음을 표현해 주세요 :)"
         />
         <input type="submit" value="tweet"/>
+        {/*글을 쓰면 제출을 해야해서 submit 그리고 onSubmit 속성과 메서드를 주면 위에 onSubmit 메서드 작동한다*/}
       </form>
       <div>
         {tweets.map((tweet) => (
