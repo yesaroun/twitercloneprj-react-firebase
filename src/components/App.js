@@ -6,23 +6,25 @@ function App() {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
+  // useState의 값이 바뀌면 화면을 다시 그려준다.
 
   const initializeUser = () => {
-      auth.onAuthStateChanged((user) => {
-        console.log("user");
-        console.log(user);
+    auth.onAuthStateChanged((user) => {
+      // 이렇게 아래처럼 user 정보 받아볼 수 있음
+      console.log("user");
+      console.log(user);
 
-        if (user) {
-          setIsLoggedIn(true);
-          // user가 로그인 되어있는지 확인
-          setUserObj(user);
-          // user 데이터 담기
-        } else {
-          setIsLoggedIn(false);
-        }
-        setInit(true);
-        // initialising은 로그인 되었는지 아닌지 체킹하는 과정이다. 그 앱 들어가면 로그인 되는 그 과정
-      });
+      if (user) {
+        setIsLoggedIn(true);
+        // user가 로그인 되어있는지 확인
+        setUserObj(user);
+        // user 데이터 담기
+      } else {
+        setIsLoggedIn(false);
+      }
+      setInit(true);
+      // initialising은 로그인 되었는지 아닌지 체킹하는 과정이다. 그 앱 들어가면 로그인 되는 그 과정
+    });
   }
 
   useEffect(() => {

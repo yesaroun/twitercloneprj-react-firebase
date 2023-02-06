@@ -2,6 +2,9 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+// firestore 에서 db 불러옴
+// 이후 25줄에서의 함수들도 호출한다.
+
 // 위 코드는 공식문서에 있다.
 
 // 코드 그대로 가져오면 된다. 홈페이지
@@ -25,3 +28,5 @@ export const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);
 export const auth = getAuth(app);
 export const dbFirestore = getFirestore();
+// https://firebase.google.com/docs/firestore?hl=ko&authuser=0
+// 참고하기
