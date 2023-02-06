@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 // 위 코드는 공식문서에 있다.
 
 // 코드 그대로 가져오면 된다. 홈페이지
@@ -19,4 +21,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
+export const analytics = getAnalytics(app);
 export const auth = getAuth(app);
+export const dbFirestore = getFirestore();

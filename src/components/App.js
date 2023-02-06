@@ -31,8 +31,10 @@ function App() {
 
   return (
     <>
+      <header>navigation</header>
       {init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj}/> : "Initializing"}
       {/*로딩이 다 끝나면 approuter가 실행되고 로딩중이면(false)면 저 문구가 실행된다*/}
+      <footer>twitter</footer>
     </>
   );
 }
